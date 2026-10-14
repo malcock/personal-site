@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-14T20:35:42.830Z",
+        "reason": "Claude: Inter is the font specified in the user's Figma test-box frame (mdawg, node 4:4)"
+      }
+    ]
+  }
+}
