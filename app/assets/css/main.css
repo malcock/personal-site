@@ -40,6 +40,9 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
   -webkit-text-size-adjust: 100%;
+  /* Chrome restores scroll on refresh by re-finding an anchor element. The page first paints in
+     the fallback font, the condensed headings rewrap, and the anchor lands ~70px lower. */
+  overflow-anchor: none;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
