@@ -43,7 +43,7 @@ Hosted experiments are plain static files under `public/x/<name>/` and are exclu
 
 Cloudflare Pages, Git-connected to this repo.
 
-- Build command `npm run build:pages`, output directory `.output/public`, `NODE_VERSION` from `.node-version`.
+- Build command `npm run build:pages`, output directory `dist` (Nitro's Cloudflare Pages preset; local builds write to `.output/public`), `NODE_VERSION` from `.node-version`.
 - **Production** (`main`): `STORYBLOK_DELIVERY_API_TOKEN` = public token, `STORYBLOK_VERSION=published`.
 - **Preview** (`preview` branch and PRs): `STORYBLOK_DELIVERY_API_TOKEN` = preview token, `STORYBLOK_VERSION=draft`. Point Storyblok's Visual Editor at the `preview` branch URL.
 - **Publish to rebuild**: a Pages deploy hook for `main` is registered as a Storyblok webhook on story published / unpublished / deleted, so publishing regenerates the site.
