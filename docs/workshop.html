@@ -1,0 +1,378 @@
+<title>Personal Site Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Big+Shoulders+Display:wght@500;800&family=Public+Sans:wght@400;600&family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+/* Layout: a working document on a 12-column paper grid; the red is reserved for decisions and the mockups. Single committed print look, chosen deliberately. */
+:root{
+  --paper:#E9E7E2; --paper-2:#DEDBD3; --ink:#161514; --ink-2:#4A4743; --rule:#B9B4AA;
+  --red:#C8281E; --red-ink:#9E1D15; --ochre:#C99A2E; --slate:#2F3A45;
+  --display:"Anybody","Arial Narrow",Arial,sans-serif;
+  --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.55 var(--body);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:24px;padding-block:0 96px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:.95}
+h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:850;font-stretch:62%;text-transform:uppercase;letter-spacing:.01em}
+h3{font-size:1.35rem;font-weight:800;font-stretch:75%;text-transform:uppercase;letter-spacing:.02em}
+p{margin:0;max-width:66ch}
+a{color:var(--red-ink)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.label{font:500 .72rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
+.mono{font-family:var(--mono);font-size:.86rem}
+
+/* masthead */
+.mast{position:relative;padding-block:56px 40px;border-bottom:3px solid var(--ink);overflow:hidden}
+.mast h1{font-size:clamp(3rem,11vw,8.5rem);font-weight:900;font-stretch:55%;text-transform:uppercase;letter-spacing:-.01em;max-width:11ch}
+.mast h1 span{color:var(--red)}
+.mast .wedge{position:absolute;right:-60px;top:40px;width:340px;height:64px;background:var(--red);transform:rotate(-24deg);transform-origin:right}
+.mast .disc{position:absolute;right:120px;top:150px;width:110px;height:110px;border-radius:50%;border:3px solid var(--ink)}
+@media (max-width:760px){.mast .wedge,.mast .disc{display:none}}
+.mast .meta{display:flex;flex-wrap:wrap;gap:8px 32px;margin-top:28px}
+.mast p.lede{margin-top:20px;font-size:1.15rem;max-width:58ch}
+
+section{padding-block:72px 0}
+.sec-head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:end;border-bottom:1px solid var(--ink);padding-bottom:14px;margin-bottom:32px}
+.sec-head .n{font:900 4.2rem/0.8 var(--display);font-stretch:50%;color:var(--red)}
+@media (max-width:600px){.sec-head{grid-template-columns:1fr;gap:6px}.sec-head .n{font-size:2.6rem}}
+.cols{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media (max-width:860px){.c4,.c5,.c6,.c7,.c8{grid-column:span 12}}
+.stack{display:grid;gap:14px}
+.note{border-left:6px solid var(--red);padding:4px 0 4px 16px}
+
+/* IA map */
+.ia{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+@media (max-width:860px){.ia{grid-template-columns:1fr}}
+.home{border:3px solid var(--ink);background:var(--paper)}
+.home header{background:var(--ink);color:var(--paper);display:flex;justify-content:space-between;padding:10px 14px;font:500 .8rem var(--mono)}
+.home ol{list-style:none;margin:0;padding:0}
+.home li{display:grid;grid-template-columns:42px 1fr auto;gap:12px;padding:12px 14px;border-top:1px solid var(--rule);align-items:baseline}
+.home li:first-child{border-top:0}
+.home li b{font:800 1.05rem var(--display);font-stretch:70%;text-transform:uppercase;letter-spacing:.03em}
+.home li .k{font:500 .75rem var(--mono);color:var(--red-ink)}
+.home li small{grid-column:2/4;color:var(--ink-2);font-size:.9rem}
+.home li.hot{background:var(--paper-2)}
+.side{display:grid;gap:16px;align-content:start}
+.page{border:2px solid var(--ink);padding:14px}
+.page .path{font:500 .85rem var(--mono);color:var(--red-ink)}
+.page b{display:block;font:800 1.1rem var(--display);font-stretch:70%;text-transform:uppercase;margin:4px 0}
+
+/* tables */
+.tbl{overflow-x:auto;border-top:3px solid var(--ink)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:.92rem}
+th{font:500 .7rem var(--mono);text-transform:uppercase;letter-spacing:.1em;text-align:left;color:var(--ink-2);padding:10px 12px;border-bottom:1px solid var(--ink)}
+td{padding:14px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+td:first-child{font:800 1.05rem/1.1 var(--display);font-stretch:72%;text-transform:uppercase;width:150px}
+td .tag{display:inline-block;font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:2px 6px;border:1px solid var(--ink);margin-top:6px}
+td .tag.r{background:var(--red);border-color:var(--red);color:var(--paper)}
+.metric{font:900 1.4rem var(--display);font-stretch:60%;color:var(--red-ink);white-space:nowrap}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--ink);border:2px solid var(--ink)}
+.anat div{background:var(--paper);padding:16px;display:grid;gap:8px;align-content:start}
+.anat b{font:800 1.05rem var(--display);font-stretch:70%;text-transform:uppercase}
+.anat code{font:500 .78rem var(--mono);color:var(--red-ink)}
+
+/* storyblok model */
+.model{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.ct{border:2px solid var(--ink);background:var(--paper)}
+.ct h4{margin:0;padding:8px 12px;background:var(--ink);color:var(--paper);font:500 .82rem var(--mono);display:flex;justify-content:space-between}
+.ct h4 i{font-style:normal;color:var(--ochre)}
+.ct ul{list-style:none;margin:0;padding:10px 12px;display:grid;gap:5px;font:.82rem/1.35 var(--mono)}
+.ct ul span{color:var(--ink-2)}
+.ct.nest h4{background:var(--slate)}
+.ct.lay h4{background:var(--red)}
+.ct.lay h4 i{color:var(--paper)}
+.exercise{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.exercise span{font:500 .75rem var(--mono);border:1px solid var(--ink);padding:4px 8px}
+
+/* directions */
+.dir{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;padding-block:36px;border-top:1px solid var(--ink)}
+.dir:first-of-type{border-top:0}
+@media (max-width:900px){.dir{grid-template-columns:1fr}}
+.dir .why{display:grid;gap:12px;align-content:start}
+.dir .why h3{font-size:2rem}
+.dir .why .letter{font:900 5rem/0.8 var(--display);font-stretch:50%;color:var(--red)}
+.frame{border:2px solid var(--ink);background:#fff;overflow:hidden;min-width:0}
+.frame .bar{display:flex;gap:6px;padding:7px 10px;background:var(--ink)}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--ink-2)}
+.frame .bar span{margin-left:8px;font:500 .7rem var(--mono);color:var(--rule)}
+
+/* --- Mock A: Diagonal Grid --- */
+.mA{--p:#ECEAE4;--k:#121212;--r:#D0281C;background:var(--p);color:var(--k);font-family:var(--body);position:relative;overflow:hidden}
+.mA .nav{display:flex;justify-content:space-between;padding:14px 22px;font:500 .72rem var(--mono);text-transform:uppercase;letter-spacing:.1em}
+.mA .hero{position:relative;padding:28px 22px 40px;min-height:320px}
+.mA .hero .slab{position:absolute;left:-40px;right:30%;top:150px;height:58px;background:var(--r);transform:rotate(-8deg);transform-origin:left}
+.mA .hero h1{position:relative;font:900 clamp(2.4rem,6.4vw,4.6rem)/.86 var(--display);font-stretch:52%;text-transform:uppercase;max-width:9ch}
+.mA .hero p{position:relative;margin-top:110px;max-width:44ch;margin-left:auto;font-size:.95rem;border-top:3px solid var(--k);padding-top:10px}
+.mA .work{display:grid;grid-template-columns:repeat(12,1fr);border-top:3px solid var(--k)}
+.mA .case{grid-column:span 12;display:grid;grid-template-columns:70px 1fr 1fr;gap:16px;padding:20px 22px;border-bottom:1px solid var(--k)}
+.mA .case .no{font:900 2.4rem/.8 var(--display);font-stretch:50%;color:var(--r)}
+.mA .case h5{margin:0;font:800 1.3rem/1 var(--display);font-stretch:62%;text-transform:uppercase}
+.mA .case .rf{font-size:.85rem;display:grid;gap:6px}
+.mA .case .rf b{font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:#5a5650}
+.mA .case .rf s{text-decoration-color:var(--r);text-decoration-thickness:3px;color:#5a5650}
+.mA .case .big{font:900 2.8rem/.8 var(--display);font-stretch:55%;color:var(--r)}
+@media (max-width:640px){.mA .case{grid-template-columns:44px 1fr}.mA .case .rf:last-child{grid-column:2}}
+
+/* --- Mock B: Proun Plan --- */
+.mB{--p:#F2F1EE;--k:#1A1A1A;--r:#C42B1F;--g:#9A968E;background:var(--p);color:var(--k);font-family:"Public Sans",system-ui,sans-serif;position:relative;overflow:hidden}
+.mB .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-bottom:1px solid var(--g)}
+.mB .grid>div{border-right:1px solid var(--g);min-height:20px}
+.mB .grid>div:last-child{border-right:0}
+.mB .top{display:grid;grid-template-columns:2fr 4fr;padding:0 0 0 0;position:relative}
+.mB .top .tl{padding:22px;border-right:1px solid var(--g);font:500 .7rem var(--mono);line-height:1.8;text-transform:uppercase;letter-spacing:.08em}
+.mB .top .tl .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--r);margin-right:6px}
+.mB .top .tr{padding:30px 26px 50px;position:relative}
+.mB .top h1{font:800 clamp(2rem,5vw,3.4rem)/.95 "Big Shoulders Display",var(--display);text-transform:uppercase;max-width:14ch;position:relative;z-index:1}
+.mB .top .sq{position:absolute;right:26px;top:24px;width:70px;height:70px;background:var(--k)}
+.mB .top .ln{position:absolute;right:60px;top:60px;width:2px;height:180px;background:var(--r);transform:rotate(38deg)}
+.mB .top .circ{position:absolute;right:120px;bottom:20px;width:40px;height:40px;border-radius:50%;border:2px solid var(--r)}
+.mB .top p{margin-top:18px;max-width:40ch;font-size:.92rem;color:#3d3b37}
+.mB .row{display:grid;grid-template-columns:2fr 4fr;border-top:1px solid var(--g)}
+.mB .row .l{padding:16px 22px;border-right:1px solid var(--g);font:500 .68rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:#6b675f}
+.mB .row .r{padding:16px 26px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline}
+.mB .row .r h5{margin:0;font:800 1.3rem "Big Shoulders Display",var(--display);text-transform:uppercase;grid-column:1/3}
+.mB .row .r .k{font:500 .66rem var(--mono);text-transform:uppercase;color:var(--r)}
+.mB .row .r p{font-size:.86rem;max-width:52ch}
+@media (max-width:640px){.mB .top,.mB .row{grid-template-columns:1fr}.mB .top .tl,.mB .row .l{border-right:0;border-bottom:1px solid var(--g)}}
+
+/* --- Mock C: Slab Index --- */
+.mC{--p:#E7E4DC;--k:#141414;--r:#BF2A1E;background:var(--p);color:var(--k);font-family:"Archivo",system-ui,sans-serif;overflow:hidden}
+.mC .hero{display:grid;grid-template-columns:56px 1fr}
+.mC .spine{background:var(--k);color:var(--p);writing-mode:vertical-rl;transform:rotate(180deg);font:800 .8rem "Archivo",sans-serif;font-stretch:125%;text-transform:uppercase;letter-spacing:.2em;padding:16px 0;text-align:center}
+.mC .hero .body{padding:24px 24px 28px}
+.mC .hero h1{font:900 clamp(2.2rem,6vw,4.2rem)/.85 "Archivo",sans-serif;font-stretch:125%;text-transform:uppercase;letter-spacing:-.02em}
+.mC .hero h1 em{font-style:normal;background:var(--r);color:var(--p);padding:0 .12em}
+.mC .hero p{margin-top:18px;max-width:46ch;font-size:.92rem}
+.mC .strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:4px solid var(--k)}
+.mC .strip div{padding:14px 18px;border-right:1px solid var(--k)}
+.mC .strip div:last-child{border-right:0}
+.mC .strip b{display:block;font:900 2.2rem/.9 "Archivo",sans-serif;font-stretch:62%;color:var(--r)}
+.mC .strip span{font-size:.78rem}
+.mC .slab{background:var(--k);color:var(--p);padding:20px 24px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}
+.mC .slab h5{margin:0;font:900 1.7rem/.9 "Archivo",sans-serif;font-stretch:112%;text-transform:uppercase}
+.mC .slab .chip{font:500 .66rem var(--mono);border:1px solid var(--p);padding:3px 7px;text-transform:uppercase}
+.mC .slab p{grid-column:1/3;font-size:.86rem;max-width:56ch;color:#cfcac0}
+@media (max-width:640px){.mC .strip{grid-template-columns:1fr}.mC .strip div{border-right:0;border-bottom:1px solid var(--k)}}
+
+/* architecture */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:2px solid var(--ink)}
+.flow div{padding:16px;border-right:2px solid var(--ink);display:grid;gap:6px;align-content:start;position:relative}
+.flow div:last-child{border-right:0}
+.flow b{font:800 1.05rem var(--display);font-stretch:70%;text-transform:uppercase}
+.flow div:not(:last-child)::after{content:"";position:absolute;right:-11px;top:22px;width:0;height:0;border-left:10px solid var(--red);border-top:8px solid transparent;border-bottom:8px solid transparent;z-index:1}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.flow div{border-right:0;border-bottom:2px solid var(--ink)}.flow div:last-child{border-bottom:0}.flow div::after{display:none}}
+
+/* decisions */
+.dec{display:grid;gap:28px}
+.q{border-top:3px solid var(--ink);padding-top:16px;display:grid;grid-template-columns:260px 1fr;gap:24px}
+@media (max-width:860px){.q{grid-template-columns:1fr}}
+.q h3{font-size:1.6rem}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.opt{border:2px solid var(--ink);padding:12px 14px;display:grid;gap:6px;align-content:start}
+.opt.rec{border-color:var(--red);background:#fff}
+.opt b{font:800 1rem var(--display);font-stretch:75%;text-transform:uppercase}
+.opt .rtag{font:500 .66rem var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--red-ink)}
+.opt p{font-size:.88rem}
+footer.end{margin-top:80px;border-top:3px solid var(--ink);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (prefers-reduced-motion:no-preference){.mast .wedge{animation:swing .9s cubic-bezier(.2,.8,.2,1) both}@keyframes swing{from{transform:rotate(0deg)}to{transform:rotate(-24deg)}}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="wedge" aria-hidden="true"></div>
+  <div class="disc" aria-hidden="true"></div>
+  <span class="label">martinalcock.co.uk / rebuild / workshop 01</span>
+  <h1 style="margin-top:14px">Problems, <span>then</span> solutions</h1>
+  <p class="lede">IA, content plan, Storyblok model and three design directions for the new site. Built from the CV source in <span class="mono">Documents/CV</span>. Decisions I need from you are at the end, each with a recommendation.</p>
+  <div class="meta">
+    <div><div class="label">Primary reader</div>Hiring managers and clients</div>
+    <div><div class="label">Secondary</div>Peers reading the writing</div>
+    <div><div class="label">Stack</div>Nuxt 4 · Storyblok · Cloudflare Pages</div>
+    <div><div class="label">Constraint</div>Works without images</div>
+  </div>
+</header>
+
+<section id="ia">
+  <div class="sec-head"><div class="n">01</div><div><span class="label">Information architecture</span><h2>One long page, two rooms off it</h2></div></div>
+  <div class="ia">
+    <div class="home">
+      <header><span>/ (home)</span><span>single scroll, anchored</span></header>
+      <ol>
+        <li><span class="k">#top</span><b>Statement</b><span class="k">hero</span><small>One sentence of positioning, in your words from PRODUCT.md. Availability line. No photo.</small></li>
+        <li class="hot"><span class="k">#work</span><b>Selected work</b><span class="k">5 cases</span><small>The spine of the site. Each case opens with the reframe (what was asked vs what the problem was), then the reasoning expands in place.</small></li>
+        <li><span class="k">#index</span><b>Also</b><span class="k">list</span><small>Shorter one-line entries: Patient.info, Children's Hospital AR, Viadex, Platinum Stairlifts, Koala, Razor site, ArchVR.</small></li>
+        <li><span class="k">#approach</span><b>How I work</b><span class="k">4 moves</span><small>Get close to the work, reframe, decide in the open, build it. Each move links back to a case that proves it.</small></li>
+        <li class="hot"><span class="k">#record</span><b>Record</b><span class="k">CV</span><small>Work history as a timeline: roles, what each one was really about, and links into the cases. Plus talks, community, education.</small></li>
+        <li><span class="k">#writing</span><b>Writing</b><span class="k">latest 3</span><small>Pulled automatically from the blog folder.</small></li>
+        <li><span class="k">#lab</span><b>Lab</b><span class="k">latest 3</span><small>Experiments, e.g. the Tailwind colour test.</small></li>
+        <li><span class="k">#contact</span><b>Contact</b><span class="k">end</span><small>Email and LinkedIn. No phone number, no form.</small></li>
+      </ol>
+    </div>
+    <div class="side">
+      <div class="page"><span class="path">/writing · /writing/[slug]</span><b>Writing</b><p>Index with tags, then long-form articles. Peer register. Paginated once it needs it.</p></div>
+      <div class="page"><span class="path">/lab · /lab/[slug]</span><b>Lab</b><p>Experiments. Each entry either embeds a demo, links out to a repo or hosted build, or is a short write-up. External builds can live on subpaths later.</p></div>
+      <div class="page"><span class="path">/work/[slug]</span><b>Case permalinks</b><p>Optional. The same story rendered on its own page, so you can send one link to a recruiter. Costs nothing: cases are their own stories anyway.</p></div>
+      <div class="note"><p><b>Why one page.</b> A hiring manager gives a portfolio about two minutes. One scroll with an anchored index lets them skim the reframes, open the one case that matches their role, and reach the record without page loads.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="content">
+  <div class="sec-head"><div class="n">02</div><div><span class="label">Content plan</span><h2>Five cases carry it</h2></div></div>
+  <p style="margin-bottom:24px">Chosen to cover the whole range you want to be hired for: discovery, service design, product direction, hands-on build, and leading teams. Every case follows the same arc, so a reader learns the pattern once. I've kept to what the evidence supports. Outcomes that didn't happen are stated plainly, because that is part of showing judgement.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Case</th><th>Asked for</th><th>The real problem</th><th>Decision</th><th>Outcome</th><th>Proves</th></tr></thead>
+    <tbody>
+      <tr><td>HomeServe<br><span class="tag r">lead</span></td><td>Fix surveys and conversion on boiler quotes.</td><td>Booked a quote at home. The rep muttered at an iPad, then told the customer which boiler they'd get. No reasoning, no choice.</td><td>Guided survey that codifies install rules, plus a screen offering every suitable boiler. Designed and built the front end.</td><td><span class="metric">+50%</span><br>sales conversion</td><td>Contextual enquiry, service design, build</td></tr>
+      <tr><td>Fixie</td><td>Automate 3D model preparation.</td><td>The client didn't need automation. They needed to quote faster.</td><td>Redesigned the quoting service around time to quote.</td><td><span class="metric">6h → &lt;5m</span><br>to quote</td><td>Reframing</td></tr>
+      <tr><td>Forgemasters</td><td>Imagine the future steelworks.</td><td>Leadership needed a shared picture before anyone would fund looking properly.</td><td>Vision workshop, then a narrated story video. That won a 3-month discovery with 200+ people, shop floor to board.</td><td><span class="metric">200+</span><br>people engaged. Proposal didn't proceed.</td><td>Facilitation, narrative, discovery at scale</td></tr>
+      <tr><td>Doxzoo</td><td>A V3 redesign of a print platform.</td><td>Many "design" issues were service-model issues. Leaders needed to tell them apart.</td><td>Full-day workshop with 8 senior leaders. Four IA propositions tested against production, pricing and delivery.</td><td>Direction signed off. Launch pending.</td><td>Senior alignment, IA, AI-assisted delivery</td></tr>
+      <tr><td>Tubr<br><span class="tag">current</span></td><td>A chat app over ML forecasts.</td><td>Operators don't want to ask questions. They want to glance. And a £3 event forecast is noise.</td><td>Dashboard-first feed. Forecasts reframed as the "local scene". AI-native team practice and PR preview environments.</td><td>Shipping. No outcome claimed yet.</td><td>Product leadership, data UX, engineering</td></tr>
+    </tbody>
+  </table></div>
+  <div class="cols" style="margin-top:32px">
+    <div class="c6 stack">
+      <h3>The record (CV)</h3>
+      <p>Each role gets: dates, title, one line on what the job <em>really</em> was, and chips linking to cases. Tubr · Doxzoo · Koala · Razor (6 years, the long chapter) · Obitus · Freelance · Patient.info · 10th Planet. Talks and Immerse Sheffield sit alongside. Skills appear as tools used <em>inside</em> each role, never as a keyword cloud.</p>
+    </div>
+    <div class="c6 stack">
+      <h3>What I'd need from you</h3>
+      <p>Nothing to start. I'll draft every case in your blog register from the evidence file and mark anything I'm unsure of. Useful later: one or two artefacts per case (a sketch, a sticky-note wall, a screen) if any survive, and a sentence on what you'd do differently for each.</p>
+    </div>
+  </div>
+</section>
+
+<section id="anatomy">
+  <div class="sec-head"><div class="n">03</div><div><span class="label">Case anatomy</span><h2>Built from blocks, not screenshots</h2></div></div>
+  <p style="margin-bottom:24px">Each block is a Storyblok component. Images are optional everywhere; the geometric language does the visual work, so a case with zero assets still looks finished.</p>
+  <div class="anat">
+    <div><code>reframe</code><b>Asked / Actually</b><p>Two statements, the first struck through in red. The hook of every case.</p></div>
+    <div><code>context</code><b>Situation</b><p>Client, sector, my role, team, duration as a compact spec strip.</p></div>
+    <div><code>finding</code><b>What I saw</b><p>Pull-quote scale observation. "He told them which boiler they'd get."</p></div>
+    <div><code>options</code><b>Options weighed</b><p>2 to 4 columns, one marked chosen, each with a why. Shows judgement.</p></div>
+    <div><code>diagram</code><b>Geometric diagram</b><p>Steps, before/after, or system map drawn from data in CSS shapes. No assets.</p></div>
+    <div><code>metric</code><b>Number</b><p>Big figure with the caveat underneath, e.g. what it was measured against.</p></div>
+    <div><code>constraint_list</code><b>Constraints</b><p>What boxed the work in. Pricing, production, deadlines.</p></div>
+    <div><code>reflection</code><b>Hindsight</b><p>What happened next and what I'd change. Where Forgemasters gets its honest ending.</p></div>
+  </div>
+</section>
+
+<section id="model">
+  <div class="sec-head"><div class="n">04</div><div><span class="label">Storyblok model</span><h2>A proper workout</h2></div></div>
+  <div class="model">
+    <div class="ct"><h4>page <i>content type</i></h4><ul><li>body <span>· bloks (any section)</span></li><li>seo <span>· title, description, og</span></li></ul></div>
+    <div class="ct"><h4>case_study <i>content type</i></h4><ul><li>title, client, sector, role, years</li><li>asked, actually <span>· the reframe</span></li><li>summary <span>· richtext</span></li><li>body <span>· case blocks</span></li><li>disciplines <span>· datasource multi-option</span></li><li>accent_shape <span>· option: bar/disc/wedge</span></li></ul></div>
+    <div class="ct"><h4>role <i>content type</i></h4><ul><li>org, title, start, end</li><li>essence <span>· one line</span></li><li>highlights <span>· richtext</span></li><li>cases <span>· story references</span></li><li>kind <span>· employed/freelance/founder</span></li></ul></div>
+    <div class="ct"><h4>article · experiment <i>content types</i></h4><ul><li>title, date, intro, tags</li><li>body <span>· richtext + embedded bloks</span></li><li>experiment: repo, live_url, status</li></ul></div>
+    <div class="ct nest"><h4>sections <i>nestable</i></h4><ul><li>hero_statement</li><li>case_list <span>· references → case_study</span></li><li>case_index <span>· references, compact</span></li><li>approach <span>· moves → case links</span></li><li>timeline <span>· references → role</span></li><li>latest_feed <span>· folder + count</span></li><li>contact</li></ul></div>
+    <div class="ct lay"><h4>layout <i>nestable · the expressive bit</i></h4><ul><li>section <span>· tone, rule, anchor</span></li><li>grid / column <span>· span, offset, row</span></li><li>shape <span>· bar, disc, wedge, angle, colour</span></li><li>rotated_label <span>· vertical text</span></li><li>spacer</li></ul></div>
+  </div>
+  <div class="exercise" aria-label="Storyblok features exercised">
+    <span>nested bloks</span><span>story references + resolve_relations</span><span>folders as collections</span><span>datasources</span><span>rich text with embedded bloks</span><span>component groups + whitelists</span><span>field conditions</span><span>Visual Editor bridge</span><span>publish webhooks</span><span>tags</span><span>link fields + anchors</span>
+  </div>
+</section>
+
+<section id="design">
+  <div class="sec-head"><div class="n">05</div><div><span class="label">Design directions</span><h2>Constructivism, with the volume down</h2></div></div>
+  <p>All three use the same rules: one red, one black, one paper; type as image; geometry instead of photography; diagonals used sparingly as emphasis rather than everywhere. They differ in how loud the geometry gets.</p>
+
+  <div class="dir">
+    <div class="frame" role="img" aria-label="Direction A mockup: diagonal red bar crossing the hero, numbered case list">
+      <div class="bar"><i></i><i></i><i></i><span>A · Diagonal Grid</span></div>
+      <div class="mA">
+        <div class="nav"><span>Martin Alcock</span><span>Work · Record · Writing · Lab</span></div>
+        <div class="hero">
+          <div class="slab" aria-hidden="true"></div>
+          <h1>Complex problems into useful products</h1>
+          <p>I bring people together to shape the direction, and stay hands-on to design and build it. Sheffield. Product, service design, front end.</p>
+        </div>
+        <div class="work">
+          <div class="case"><span class="no">01</span><div><h5>HomeServe</h5><div class="rf" style="margin-top:10px"><b>Asked</b><s>Fix the survey app</s><b>Actually</b><span>Customers were told which boiler they'd get, and never why.</span></div></div><div class="rf"><span class="big">+50%</span><span>sales conversion, attributed to the choice screen I designed and built.</span></div></div>
+          <div class="case"><span class="no">02</span><div><h5>Fixie</h5><div class="rf" style="margin-top:10px"><b>Asked</b><s>Automate 3D model prep</s><b>Actually</b><span>They needed to quote faster.</span></div></div><div class="rf"><span class="big">6h→5m</span><span>time to quote.</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="why"><span class="letter">A</span><h3>Diagonal Grid</h3><p>The closest to the source. One big red bar per section, set at a slight angle, crossing the type. Condensed heavy caps. Numbered cases because the order is your choice of priority.</p><p class="mono">Display: Anybody (variable width)<br>Body: Golos Text<br>Data: IBM Plex Mono</p><p><b>Storyblok:</b> shape blocks carry angle and length, so you can compose each section's diagonal in the editor.</p></div>
+  </div>
+
+  <div class="dir">
+    <div class="frame" role="img" aria-label="Direction B mockup: thin construction grid, small floating shapes, labelled rows">
+      <div class="bar"><i></i><i></i><i></i><span>B · Proun Plan</span></div>
+      <div class="mB">
+        <div class="grid" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div class="top">
+          <div class="tl"><span class="dot"></span>Available<br>Sheffield / remote<br>Product · Service · Build</div>
+          <div class="tr"><div class="sq" aria-hidden="true"></div><div class="ln" aria-hidden="true"></div><div class="circ" aria-hidden="true"></div>
+            <h1>I turn complex problems into useful products</h1>
+            <p>Bringing people together to shape the direction, then staying hands-on to design and build it.</p></div>
+        </div>
+        <div class="row"><div class="l">Case 01 · 2021</div><div class="r"><h5>HomeServe</h5><span class="k">Asked</span><p>Fix survey accuracy and conversion.</p><span class="k">Found</span><p>Customers were handed a boiler with no reasoning and no choice.</p><span class="k">Result</span><p>+50% sales conversion after the choice screen shipped.</p></div></div>
+      </div>
+    </div>
+    <div class="why"><span class="letter">B</span><h3>Proun Plan</h3><p>After Lissitzky's Proun drawings: a visible construction grid, thin lines, small solid shapes floating at angles. The quietest and most architectural. Reads like a technical drawing of your thinking.</p><p class="mono">Display: Big Shoulders Display<br>Body: Public Sans<br>Data: IBM Plex Mono</p><p><b>Storyblok:</b> grid and column blocks with span and offset do most of the expressive work.</p></div>
+  </div>
+
+  <div class="dir">
+    <div class="frame" role="img" aria-label="Direction C mockup: vertical black spine label, wide heavy type, black slab cases">
+      <div class="bar"><i></i><i></i><i></i><span>C · Slab Index</span></div>
+      <div class="mC">
+        <div class="hero"><div class="spine">Martin Alcock · Sheffield</div><div class="body"><h1>Problems <em>first</em>.<br>Then the product.</h1><p>Twenty years across product, service design and front-end build. I lead the direction with others and do the work myself.</p></div></div>
+        <div class="strip"><div><b>+50%</b><span>HomeServe conversion</span></div><div><b>6h→5m</b><span>Fixie time to quote</span></div><div><b>200+</b><span>people in Forgemasters discovery</span></div></div>
+        <div class="slab"><h5>HomeServe</h5><span class="chip">Discovery · Build</span><p>The rep told the customer which boiler they'd get. I built the screen that let them choose.</p></div>
+      </div>
+    </div>
+    <div class="why"><span class="letter">C</span><h3>Slab Index</h3><p>Rodchenko's typography rather than his geometry: wide heavy type, black slabs with knocked-out text, vertical spine labels. Most confident, most poster-like. Leans on numbers, so it rewards the cases that have them.</p><p class="mono">Display + body: Archivo (wide + narrow)<br>Data: IBM Plex Mono</p><p><b>Storyblok:</b> section tone (paper, ink, red) flips whole blocks; metric strips are their own block.</p></div>
+  </div>
+  <p class="note" style="margin-top:12px"><b>My pick: A, borrowing B's construction grid on the Record section.</b> A gives the strongest identity with the fewest elements, and the struck-through "Asked" line is a device only your content has. Showing the faint grid on the CV timeline signals structure where the content is most structured.</p>
+</section>
+
+<section id="delivery">
+  <div class="sec-head"><div class="n">06</div><div><span class="label">Delivery</span><h2>Publish, build, flat HTML</h2></div></div>
+  <div class="flow">
+    <div><span class="label">1</span><b>Publish</b><p>Story published in Storyblok.</p></div>
+    <div><span class="label">2</span><b>Webhook</b><p>Storyblok calls the Cloudflare Pages deploy hook.</p></div>
+    <div><span class="label">3</span><b>Build</b><p>Pages pulls <span class="mono">main</span>, runs <span class="mono">nuxt generate</span> with the public token.</p></div>
+    <div><span class="label">4</span><b>Crawl</b><p>Every story pre-rendered from the Storyblok links API. No runtime API calls.</p></div>
+    <div><span class="label">5</span><b>Serve</b><p>Static files on the edge at martinalcock.co.uk.</p></div>
+  </div>
+  <div class="cols" style="margin-top:24px">
+    <div class="c6 stack"><h3>Editing preview</h3><p>The Visual Editor needs live drafts, which flat HTML can't give. A <span class="mono">preview</span> branch deploys the same app to a Pages preview URL built with the preview token and draft mode on. The editor points there. Production never sees drafts.</p></div>
+    <div class="c6 stack"><h3>Code pushes</h3><p>Pushes to <span class="mono">main</span> build production as normal. PRs get Pages preview URLs for free. Vercel and Netlify config gets removed.</p></div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="sec-head"><div class="n">07</div><div><span class="label">Decisions</span><h2>What I need from you</h2></div></div>
+  <div class="dec">
+    <div class="q"><div><span class="label">Content</span><h3>How deep do cases go on the home page?</h3></div><div class="opts">
+      <div class="opt rec"><span class="rtag">Recommended</span><b>Hook inline, reasoning expands</b><p>Reframe, outcome and two lines always visible. "The reasoning" opens in place. Permalink page too.</p></div>
+      <div class="opt"><b>Summaries only</b><p>Home shows the hook. Full case on /work/[slug].</p></div>
+      <div class="opt"><b>Everything inline</b><p>Truest to one page. Very long scroll.</p></div>
+    </div></div>
+    <div class="q"><div><span class="label">Content</span><h3>Which cases lead?</h3></div><div class="opts">
+      <div class="opt rec"><span class="rtag">Recommended</span><b>Five deep</b><p>HomeServe, Fixie, Forgemasters, Doxzoo, Tubr. Rest in the index.</p></div>
+      <div class="opt"><b>Three deep</b><p>HomeServe, Forgemasters, Tubr. Tighter, less range.</p></div>
+      <div class="opt"><b>Seven deep</b><p>Add Patient.info and the Children's Hospital AR app.</p></div>
+    </div></div>
+    <div class="q"><div><span class="label">Design</span><h3>Which direction?</h3></div><div class="opts">
+      <div class="opt rec"><span class="rtag">Recommended</span><b>A + B's grid</b><p>Diagonal Grid, construction lines on the Record.</p></div>
+      <div class="opt"><b>B · Proun Plan</b><p>Quietest, most architectural.</p></div>
+      <div class="opt"><b>C · Slab Index</b><p>Loudest, most typographic.</p></div>
+    </div></div>
+    <div class="q"><div><span class="label">Infrastructure</span><h3>Domain cutover</h3></div><div class="opts">
+      <div class="opt rec"><span class="rtag">Recommended</span><b>Move DNS to Cloudflare</b><p>Change nameservers at your registrar. I'll list the mail and SPF records to copy first, since email currently lives on your LayerIP host.</p></div>
+      <div class="opt"><b>Keep DNS at LayerIP</b><p>CNAME www to Pages, redirect the bare domain at LayerIP. Messier.</p></div>
+      <div class="opt"><b>Later</b><p>Launch on the pages.dev URL, cut over when happy.</p></div>
+    </div></div>
+  </div>
+</section>
+
+<footer class="end"><span class="label">Workshop 01 · 15 Oct 2026</span><span class="label">Next: build the chosen direction</span></footer>
+</div>

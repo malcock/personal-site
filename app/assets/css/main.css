@@ -1,0 +1,331 @@
+/*
+ * Direction A, "Diagonal Grid": pared-back Constructivism.
+ * One paper, one ink, one red. Type is the image; geometry replaces photography.
+ * Diagonals are emphasis, used once per section at most.
+ */
+:root {
+  --paper: #eceae4;
+  --paper-2: #e1ded6;
+  --ink: #141413;
+  --ink-2: #55514b;
+  --rule: #bdb8ae;
+  --red: #cf2a1e;
+  --red-ink: #a51f15; /* red for small text, AA on paper */
+
+  --display: "Anybody", "Arial Narrow", Arial, sans-serif;
+  --body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --gutter: clamp(16px, 4vw, 40px);
+  --max: 1240px;
+  --measure: 64ch;
+
+  --step--1: 0.84rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3rem;
+  --step-2: clamp(1.6rem, 2.6vw, 2.1rem);
+  --step-3: clamp(2.2rem, 5vw, 3.6rem);
+  --step-4: clamp(3rem, 9vw, 7.2rem);
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--step-0) / 1.6 var(--body);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-family: var(--display);
+  text-wrap: balance;
+  line-height: 0.95;
+}
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  color: var(--red-ink);
+}
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+::selection {
+  background: var(--red);
+  color: var(--paper);
+}
+
+/* ---------- primitives ---------- */
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.label {
+  font: 500 0.72rem/1.3 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+}
+.display {
+  font-family: var(--display);
+  font-weight: 880;
+  font-stretch: 55%;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.mono {
+  font-family: var(--mono);
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.red {
+  color: var(--red);
+}
+
+/* ---------- prose (rich text) ---------- */
+.prose {
+  display: grid;
+  gap: 1em;
+  max-width: var(--measure);
+}
+.prose > * {
+  margin: 0;
+}
+.prose h2,
+.prose h3 {
+  font-weight: 820;
+  font-stretch: 62%;
+  text-transform: uppercase;
+  margin-top: 0.8em;
+}
+.prose h2 {
+  font-size: var(--step-2);
+}
+.prose h3 {
+  font-size: var(--step-1);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.2em;
+  display: grid;
+  gap: 0.4em;
+}
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+.prose ul > li {
+  position: relative;
+  padding-left: 1.4em;
+}
+.prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.7em;
+  height: 0.22em;
+  background: var(--red);
+  transform: rotate(-12deg);
+}
+.prose li > p {
+  margin: 0;
+}
+.prose blockquote {
+  margin: 0;
+  border-left: 6px solid var(--red);
+  padding-left: 1em;
+  font-size: var(--step-1);
+}
+.prose code {
+  font: 0.88em var(--mono);
+  background: var(--paper-2);
+  padding: 0.05em 0.3em;
+}
+.prose a {
+  color: var(--red-ink);
+}
+.prose--lead {
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+.prose--small {
+  font-size: var(--step--1);
+}
+
+/* ---------- page sections ---------- */
+main.home {
+  counter-reset: sec;
+}
+.sec {
+  position: relative;
+  padding-block: clamp(64px, 9vw, 120px) 0;
+}
+.sec-head {
+  display: grid;
+  grid-template-columns: minmax(64px, 140px) 1fr;
+  gap: 8px 24px;
+  align-items: end;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 14px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+main.home .sec-head::before {
+  counter-increment: sec;
+  content: counter(sec, decimal-leading-zero);
+  font: 900 clamp(2.6rem, 6vw, 4.6rem) / 0.8 var(--display);
+  font-stretch: 50%;
+  color: var(--red);
+  grid-row: span 2;
+}
+.sec-head h2 {
+  font-size: var(--step-3);
+  font-weight: 880;
+  font-stretch: 58%;
+  text-transform: uppercase;
+}
+.sec-head .label {
+  grid-column: 2;
+}
+main:not(.home) .sec-head {
+  grid-template-columns: 1fr;
+}
+main:not(.home) .sec-head .label {
+  grid-column: 1;
+}
+@media (max-width: 600px) {
+  .sec-head {
+    grid-template-columns: 1fr;
+  }
+  main.home .sec-head::before {
+    grid-row: auto;
+    font-size: 2.4rem;
+  }
+  .sec-head .label {
+    grid-column: 1;
+  }
+}
+.sec-intro {
+  max-width: var(--measure);
+  margin-bottom: 32px;
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+/* tones */
+.tone-ink {
+  background: var(--ink);
+  color: var(--paper);
+  --rule: #3b3935;
+  --ink-2: #b4afa5;
+}
+.tone-ink .sec-head {
+  border-color: var(--paper);
+}
+.tone-red {
+  background: var(--red);
+  color: var(--paper);
+  --ink-2: #f6d9d3;
+  --red-ink: var(--paper);
+}
+.tone-red .sec-head {
+  border-color: var(--paper);
+}
+.tone-red .sec-head::before {
+  color: var(--paper) !important;
+}
+.tone-ink,
+.tone-red {
+  padding-bottom: clamp(48px, 7vw, 96px);
+  margin-top: clamp(64px, 9vw, 120px);
+}
+
+/* construction grid overlay (Proun lines) */
+.construct {
+  position: relative;
+  isolation: isolate;
+}
+.construct::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(100% / 12 - 1px),
+    color-mix(in srgb, var(--rule) 70%, transparent) calc(100% / 12 - 1px),
+    color-mix(in srgb, var(--rule) 70%, transparent) calc(100% / 12)
+  );
+}
+
+/* chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.chip {
+  font: 500 0.68rem/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid currentColor;
+  padding: 5px 7px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.chip:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--paper);
+}

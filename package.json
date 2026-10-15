@@ -1,5 +1,5 @@
 {
-	"name": "blueprint-core-nuxt",
+	"name": "martinalcock-site",
 	"type": "module",
 	"private": true,
 	"scripts": {
@@ -7,7 +7,9 @@
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
+		"postinstall": "nuxt prepare",
+		"build:pages": "nuxt generate && node scripts/spa-fallback.mjs",
+		"serve:static": "npx --yes serve@14.2.4 .output/public -l 4173"
 	},
 	"dependencies": {
 		"nuxt": "^4.2.2",
