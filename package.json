@@ -12,8 +12,8 @@
 		"serve:static": "npx --yes serve@14.2.4 .output/public -l 4173"
 	},
 	"dependencies": {
-		"nuxt": "^4.2.2",
-		"vue": "^3.5.18",
+		"nuxt": "^4.6.1",
+		"vue": "^3.5.44",
 		"vue-router": "^4.5.1"
 	},
 	"devDependencies": {
